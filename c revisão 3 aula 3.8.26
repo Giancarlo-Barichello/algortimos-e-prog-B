@@ -25,12 +25,12 @@ int main() {
         printf("Opcao: ");
         scanf("%d", &opcao);
 
-        switch (opcao) {
+        switch(opcao) {
 
         case 1:
             printf("Populando vetor...\n");
 
-            for (int i = 0; i < TAMANHO; i++) {
+            for(int i = 0; i < TAMANHO; i++) {
                 vetor[i] = rand() % 100;
             }
 
@@ -38,96 +38,87 @@ int main() {
             break;
 
         case 2:
-            if (qtd_elementos > 0) {
+            if(qtd_elementos > 0) {
+
                 printf("Valores do vetor:\n");
 
-                for (int i = 0; i < TAMANHO; i++) {
+                for(int i = 0; i < TAMANHO; i++) {
                     printf("%d\t", vetor[i]);
                 }
 
                 printf("\n");
+
             } else {
-                printf("Vetor vazio.\n");
+                printf("Vetor vazio!\n");
             }
             break;
 
         case 3:
-            if (qtd_elementos > 0) {
+            if(qtd_elementos > 0) {
 
-                for (int i = 0; i < TAMANHO - 1; i++) {
-                    for (int j = 0; j < TAMANHO - 1 - i; j++) {
-                        if (vetor[j] > vetor[j + 1]) {
-                            int aux = vetor[j];
+                int aux;
+
+                for(int i = 0; i < TAMANHO - 1; i++) {
+                    for(int j = 0; j < TAMANHO - 1; j++) {
+
+                        if(vetor[j] > vetor[j + 1]) {
+                            aux = vetor[j];
                             vetor[j] = vetor[j + 1];
                             vetor[j + 1] = aux;
                         }
                     }
                 }
 
-                printf("Vetor ordenado com sucesso!\n");
+                printf("Vetor ordenado!\n");
 
             } else {
-                printf("Vetor vazio.\n");
+                printf("Vetor vazio!\n");
             }
             break;
 
         case 4:
-            if (qtd_elementos > 0) {
+            if(qtd_elementos > 0) {
 
-                float soma = 0;
+                int soma = 0;
 
-                for (int i = 0; i < TAMANHO; i++) {
-                    soma += vetor[i];
+                for(int i = 0; i < TAMANHO; i++) {
+                    soma = soma + vetor[i];
                 }
 
-                printf("Media = %.2f\n", soma / TAMANHO);
+                printf("Media = %.2f\n", (float)soma / TAMANHO);
 
             } else {
-                printf("Vetor vazio.\n");
+                printf("Vetor vazio!\n");
             }
             break;
 
         case 5:
-            if (qtd_elementos > 0) {
+            if(qtd_elementos > 0) {
 
-                int temp[TAMANHO];
+                float mediana;
 
-                for (int i = 0; i < TAMANHO; i++) {
-                    temp[i] = vetor[i];
-                }
-
-                for (int i = 0; i < TAMANHO - 1; i++) {
-                    for (int j = 0; j < TAMANHO - 1 - i; j++) {
-                        if (temp[j] > temp[j + 1]) {
-                            int aux = temp[j];
-                            temp[j] = temp[j + 1];
-                            temp[j + 1] = aux;
-                        }
-                    }
-                }
-
-                float mediana = (temp[4] + temp[5]) / 2.0;
+                mediana = (vetor[4] + vetor[5]) / 2.0;
 
                 printf("Mediana = %.2f\n", mediana);
 
             } else {
-                printf("Vetor vazio.\n");
+                printf("Vetor vazio!\n");
             }
             break;
 
         case 6:
-            if (qtd_elementos > 0) {
+            if(qtd_elementos > 0) {
 
                 int menor = vetor[0];
                 int maior = vetor[0];
 
-                for (int i = 1; i < TAMANHO; i++) {
+                for(int i = 1; i < TAMANHO; i++) {
 
-                    if (vetor[i] < menor) {
+                    if(vetor[i] < menor) {
                         menor = vetor[i];
                     }
 
-                    if (vetor[i] > maior) {
+                    if(vetor[i] > maior) {
                         maior = vetor[i];
                     }
                 }
@@ -136,21 +127,21 @@ int main() {
                 printf("Maior valor = %d\n", maior);
 
             } else {
-                printf("Vetor vazio.\n");
+                printf("Vetor vazio!\n");
             }
             break;
 
         case 7:
-            printf("Sistema encerrado.\n");
+            printf("Sistema encerrado!\n");
             break;
 
         default:
-            printf("Opcao invalida.\n");
+            printf("Opcao invalida!\n");
         }
 
         system("pause");
 
-    } while (opcao != 7);
+    } while(opcao != 7);
 
     return 0;
 }
