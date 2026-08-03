@@ -1,0 +1,156 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+#define TAMANHO 10
+
+int main() {
+    int opcao;
+    int vetor[TAMANHO];
+    int qtd_elementos = 0;
+
+    srand(time(NULL));
+
+    do {
+        system("cls");
+
+        printf("MENU PRINCIPAL\n");
+        printf("1 - Popular vetor com numeros aleatorios\n");
+        printf("2 - Listar vetor populado\n");
+        printf("3 - Ordenar vetor\n");
+        printf("4 - Calcular media\n");
+        printf("5 - Calcular mediana\n");
+        printf("6 - Mostrar menor e maior valor\n");
+        printf("7 - Sair do sistema\n");
+        printf("Opcao: ");
+        scanf("%d", &opcao);
+
+        switch (opcao) {
+
+        case 1:
+            printf("Populando vetor...\n");
+
+            for (int i = 0; i < TAMANHO; i++) {
+                vetor[i] = rand() % 100;
+            }
+
+            qtd_elementos = TAMANHO;
+            break;
+
+        case 2:
+            if (qtd_elementos > 0) {
+                printf("Valores do vetor:\n");
+
+                for (int i = 0; i < TAMANHO; i++) {
+                    printf("%d\t", vetor[i]);
+                }
+
+                printf("\n");
+            } else {
+                printf("Vetor vazio.\n");
+            }
+            break;
+
+        case 3:
+            if (qtd_elementos > 0) {
+
+                for (int i = 0; i < TAMANHO - 1; i++) {
+                    for (int j = 0; j < TAMANHO - 1 - i; j++) {
+                        if (vetor[j] > vetor[j + 1]) {
+                            int aux = vetor[j];
+                            vetor[j] = vetor[j + 1];
+                            vetor[j + 1] = aux;
+                        }
+                    }
+                }
+
+                printf("Vetor ordenado com sucesso!\n");
+
+            } else {
+                printf("Vetor vazio.\n");
+            }
+            break;
+
+        case 4:
+            if (qtd_elementos > 0) {
+
+                float soma = 0;
+
+                for (int i = 0; i < TAMANHO; i++) {
+                    soma += vetor[i];
+                }
+
+                printf("Media = %.2f\n", soma / TAMANHO);
+
+            } else {
+                printf("Vetor vazio.\n");
+            }
+            break;
+
+        case 5:
+            if (qtd_elementos > 0) {
+
+                int temp[TAMANHO];
+
+                for (int i = 0; i < TAMANHO; i++) {
+                    temp[i] = vetor[i];
+                }
+
+                for (int i = 0; i < TAMANHO - 1; i++) {
+                    for (int j = 0; j < TAMANHO - 1 - i; j++) {
+                        if (temp[j] > temp[j + 1]) {
+                            int aux = temp[j];
+                            temp[j] = temp[j + 1];
+                            temp[j + 1] = aux;
+                        }
+                    }
+                }
+
+                float mediana = (temp[4] + temp[5]) / 2.0;
+
+                printf("Mediana = %.2f\n", mediana);
+
+            } else {
+                printf("Vetor vazio.\n");
+            }
+            break;
+
+        case 6:
+            if (qtd_elementos > 0) {
+
+                int menor = vetor[0];
+                int maior = vetor[0];
+
+                for (int i = 1; i < TAMANHO; i++) {
+
+                    if (vetor[i] < menor) {
+                        menor = vetor[i];
+                    }
+
+                    if (vetor[i] > maior) {
+                        maior = vetor[i];
+                    }
+                }
+
+                printf("Menor valor = %d\n", menor);
+                printf("Maior valor = %d\n", maior);
+
+            } else {
+                printf("Vetor vazio.\n");
+            }
+            break;
+
+        case 7:
+            printf("Sistema encerrado.\n");
+            break;
+
+        default:
+            printf("Opcao invalida.\n");
+        }
+
+        system("pause");
+
+    } while (opcao != 7);
+
+    return 0;
+}
