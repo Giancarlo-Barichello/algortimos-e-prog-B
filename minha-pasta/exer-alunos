@@ -1,0 +1,83 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#define max 100
+
+typedef struct{
+	int matri;
+	float n1, n2, n3;
+} Aluno;
+
+	int main(){
+	Aluno mat[max];
+	int totalAlunos = 0;
+	int op = 0;
+	int i = 0;
+	float media = 0;
+	float soma =0;
+	
+	do{
+		system ("cls");
+		printf ("-----Menu-----\n");
+		printf ("1 - Cadastrar aluno e suas notas\n");
+		printf ("2 - Listar alunos e suas respectivas medias\n");
+		printf ("3 - Sair do programa\n");
+		printf ("--------------\n");
+		
+		printf ("opcao: \n");
+		scanf ("%d", &op);
+		
+		switch (op){
+			case 1:
+				if (totalAlunos == max){
+					printf ("Ja atingiu a quantidade maxima de cadastros possiveis\n");
+				}else{
+					printf ("-----Cadastrando-----\n");
+					printf ("Matricula: \n");
+					scanf ("%d", &mat[totalAlunos].matri);
+					
+					printf ("Primeira Nota: \n");
+					scanf ("%f", &mat[totalAlunos].n1);
+					
+					printf ("Segunda Nota: \n");
+					scanf ("%f", &mat[totalAlunos].n2);
+					
+					printf ("Terceira Nota: \n");
+					scanf ("%f", &mat[totalAlunos].n3);
+					
+					printf ("Aluno cadastrado com sucesso\n");
+					
+					totalAlunos++;
+				}
+				break;
+				
+			case 2:
+				if (totalAlunos == 0){
+					printf ("Nao ha alunos cadastrados\n");
+				}else {
+				 
+					printf ("-------------------------------\n");
+					for (i=0; i < totalAlunos; i++){
+						soma = mat[i].n1 + mat[i].n2 + mat[i].n3;
+						media = soma/3;
+						printf ("Aluno %d tem %.2f de media.\n", mat[i].matri, media);
+						printf ("-------------------------------\n");
+					}	
+				}
+				break;
+				
+			case 3:
+			 	printf("Sistema encerrado\n");
+                break;
+            default:
+                printf("Opcao invalida. Redigite\n");
+                break;
+		}
+		
+		system ("pause");
+	} while (op !=3);
+	
+	
+	
+	return 0;
+}
