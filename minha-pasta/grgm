@@ -1,0 +1,113 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <limits>
+using namespace std;
+#include "meusTipos.h"
+
+// Procura o índice do veículo pela placa. Retorna -1 se não encontrar.
+int buscarVeiculo(const vector<Veiculo>& garagem, const string& placa) {
+    for (size_t i = 0; i < garagem.size(); i++) {
+        if (garagem[i].placa == placa) {
+            return static_cast<int>(i);
+        }
+    }
+    return -1;
+}
+
+int main() {
+    vector<Veiculo> garagem;
+    int opcao;
+    string placa, cor, horaEntrada;
+
+    do {
+        cout << "Menu de opcoes:\n";
+        cout << "1 - Adicionar veiculo\n";
+        cout << "2 - Listar veiculos\n";
+        cout << "3 - Registrar saida de veiculo\n";
+        cout << "0 - Sair\n";
+        cout << "Escolha uma opcao: ";
+        cin >> opcao;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Limpa o buffer de entrada
+
+        switch (opcao) {
+            case 1:
+                cout << "Digite a placa do veiculo: ";
+                getline(cin, placa);
+                cout << "Digite a cor do veiculo: ";
+                getline(cin, cor);
+                cout << "Digite a hora de entrada do veiculo: [hh:mm] ";
+                getline(cin, horaEntrada);
+                garagem.push_back({placa, cor, horaEntrada});
+                cout << "Veiculo adicionado com sucesso.\n";
+                break;
+
+            case 2:
+                cout << "Veiculos na garagem:\n";
+                if (garagem.empty()) {
+                    cout << "Nenhum veiculo na garagem.\n";
+                } else {
+                    for (size_t i = 0; i < garagem.size(); i++) {
+                        cout << "Placa: " << garagem[i].placa
+                             << ", Cor: " << garagem[i].cor
+                             << ", Hora de Entrada: " << garagem[i].horaEntrada << endl;
+                    }
+                }
+                break;
+
+            case 3: {
+                if (garagem.empty()) {
+                    cout << "Nenhum veiculo na garagem para dar saida.\n";
+                    break;
+                }
+
+                string placa1, placa2, horaSaida;
+
+                cout << "Digite a placa do veiculo para saida: ";
+                getline(cin, placa1);
+
+                int idx = buscarVeiculo(garagem, placa1);
+                if (idx == -1) {
+                    cout << "Veiculo com placa \"" << placa1 << "\" nao encontrado na garagem.\n";
+                    break;
+                }
+
+                // Mostra os dados do veículo encontrado antes de confirmar
+                cout << "Veiculo encontrado:\n";
+                cout << "Placa: " << garagem[idx].placa
+                     << ", Cor: " << garagem[idx].cor
+                     << ", Hora de Entrada: " << garagem[idx].horaEntrada << endl;
+
+                cout << "Confirme a placa do veiculo para saida: ";
+                getline(cin, placa2);
+
+                if (placa1 != placa2) {
+                    cout << "As placas informadas nao conferem. Operacao de saida cancelada.\n";
+                    break;
+                }
+
+                cout << "Digite a hora de saida do veiculo: [hh:mm] ";
+                getline(cin, horaSaida);
+
+                cout << "Saida registrada com sucesso!\n";
+                cout << "Placa: " << garagem[idx].placa
+                     << ", Cor: " << garagem[idx].cor
+                     << ", Entrada: " << garagem[idx].horaEntrada
+                     << ", Saida: " << horaSaida << endl;
+
+                // Remove o veículo da garagem após confirmar a saída
+                garagem.erase(garagem.begin() + idx);
+                break;
+            }
+
+            case 0:
+                cout << "Saindo do programa.\n";
+                break;
+
+            default:
+                cout << "Opcao invalida. Tente novamente.\n";
+        }
+    } while (opcao != 0);
+
+    return 0;
+}
