@@ -1,0 +1,31 @@
+#include <iostream>
+#include <string>
+#include <cctype>
+
+using namespace std;
+
+string paraMaiuscula(const string& frase)
+{
+    string resultado = frase;
+
+    for (char& c : resultado)
+    {
+        c = toupper(static_cast<unsigned char>(c));
+    }
+
+    return resultado;
+}
+
+int main()
+{
+    string frase;
+
+    cout << "Digite uma frase: ";
+    getline(cin, frase);
+
+    string maiuscula = paraMaiuscula(frase);
+
+    cout << "Frase em maiúscula: " << maiuscula << endl;
+
+    return 0;
+}
