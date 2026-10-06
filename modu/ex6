@@ -1,0 +1,42 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+string primeiroNome(const string& nomeCompleto)
+{
+    
+    size_t inicio = nomeCompleto.find_first_not_of(' ');
+
+    if (inicio == string::npos)
+    {
+        return "";  
+    }
+
+    
+    size_t fim = nomeCompleto.find(' ', inicio);
+
+    if (fim == string::npos)
+    {
+        return nomeCompleto.substr(inicio); 
+    }
+
+    return nomeCompleto.substr(inicio, fim - inicio);
+}
+
+int main()
+{
+    string nomeCompleto;
+
+    cout << "Digite o nome completo: ";
+    getline(cin, nomeCompleto);
+
+    string nome = primeiroNome(nomeCompleto);
+
+    if (nome.empty())
+        cout << "Nome inválido." << endl;
+    else
+        cout << "Primeiro nome: " << nome << endl;
+
+    return 0;
+}
