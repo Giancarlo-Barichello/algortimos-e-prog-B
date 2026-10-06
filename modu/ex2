@@ -1,0 +1,86 @@
+#include <iostream>
+#include <string>
+#include <cctype>
+
+using namespace std;
+
+// Retorna true se a string não for vazia e tiver apenas dígitos
+bool soDigitos(const string& s)
+{
+    if (s.empty()) return false;
+
+    for (char c : s)
+    {
+        if (!isdigit(static_cast<unsigned char>(c)))
+            return false;
+    }
+    return true;
+}
+
+bool anoBissexto(int ano)
+{
+    return (ano % 400 == 0) || (ano % 4 == 0 && ano % 100 != 0);
+}
+
+void validarData(const string& diaStr, const string& mesStr, const string& anoStr)
+{
+    // 1. Verifica se todos contêm apenas números
+    // (limita o tamanho para evitar overflow na conversão)
+    if (!soDigitos(diaStr) || !soDigitos(mesStr) || !soDigitos(anoStr) ||
+        diaStr.length() > 2 || mesStr.length() > 2 || anoStr.length() > 4)
+    {
+        cout << "DATA INVÁLIDA" << endl;
+        return;
+    }
+
+    // 2. Converte para inteiro
+    int dia = stoi(diaStr);
+    int mes = stoi(mesStr);
+    int ano = stoi(anoStr);
+
+    // 3. Valida ano e mês
+    if (ano < 1 || mes < 1 || mes > 12 || dia < 1)
+    {
+        cout << "DATA INVÁLIDA" << endl;
+        return;
+    }
+
+    // 4. Define o último dia do mês
+    int diasNoMes;
+
+    switch (mes)
+    {
+        case 4: case 6: case 9: case 11:
+            diasNoMes = 30;
+            break;
+        case 2:
+            diasNoMes = anoBissexto(ano) ? 29 : 28;
+            break;
+        default:
+            diasNoMes = 31;
+    }
+
+    // 5. Valida o dia
+    if (dia <= diasNoMes)
+        cout << "DATA VÁLIDA" << endl;
+    else
+        cout << "DATA INVÁLIDA" << endl;
+}
+
+int main()
+{
+    string dia, mes, ano;
+
+    cout << "Digite o dia: ";
+    cin >> dia;
+
+    cout << "Digite o mês: ";
+    cin >> mes;
+
+    cout << "Digite o ano: ";
+    cin >> ano;
+
+    validarData(dia, mes, ano);
+
+    return 0;
+}
