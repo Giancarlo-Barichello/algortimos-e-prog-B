@@ -1,0 +1,36 @@
+#include <iostream>
+#include <string>
+#include <cctype>
+
+using namespace std;
+
+int contarVogais(const string& frase)
+{
+    int contador = 0;
+
+    for (char c : frase)
+    {
+        switch (tolower(static_cast<unsigned char>(c)))
+        {
+            case 'a': case 'e': case 'i': case 'o': case 'u':
+                contador++;
+                break;
+        }
+    }
+
+    return contador;
+}
+
+int main()
+{
+    string frase;
+
+    cout << "Digite uma frase: ";
+    getline(cin, frase);
+
+    int total = contarVogais(frase);
+
+    cout << "A frase possui " << total << " vogal(is)." << endl;
+
+    return 0;
+}
