@@ -1,0 +1,37 @@
+#include <iostream>
+#include <string>
+#include <cctype>
+
+using namespace std;
+
+void contarLetra(const string& palavra, char letra)
+{
+    int contador = 0;
+
+    for (char c : palavra)
+    {
+        if (tolower(c) == tolower(letra))
+        {
+            contador++;
+        }
+    }
+
+    cout << "A letra '" << letra << "' aparece " << contador
+         << " vez(es) na palavra \"" << palavra << "\"." << endl;
+}
+
+int main()
+{
+    string palavra;
+    char letra;
+
+    cout << "Digite uma palavra: ";
+    cin >> palavra;
+
+    cout << "Digite uma letra: ";
+    cin >> letra;
+
+    contarLetra(palavra, letra);
+
+    return 0;
+}
