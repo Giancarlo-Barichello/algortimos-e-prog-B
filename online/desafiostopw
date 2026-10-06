@@ -1,0 +1,55 @@
+/*
+Desafio em Arquivos txt
+
+A ideia geral e principal é:
+i) carregar os stop words do arquivo stopWords.txt em um lista de stopWords
+ii) ler o arquivo do texto original e suas palavras
+iii) comparar a palavra lida com as palavras na lista de stopWords
+iv) descarregar em arquivo de saida as palavras do texto que não forem stop words
+
+cultura in [a, as, o, os, um, uns, uma, umas]
+*/
+
+#include <iostream>
+#include <string>
+#include <vector>
+#include <fstream>
+
+using namespace std;
+
+#include "util.h"
+
+int main() {
+    ifstream arquivoStopWords;
+    vector<string> listaStopWords;
+
+    arquivoStopWords.open("stopWords.txt");
+    if (!arquivoStopWords) {
+        cout << "Arquivo de stop words nao localizado. Programa encerrado." << endl;
+        exit(0);
+    } 
+
+	string linha;
+	while (!arquivoStopWords.eof()) {
+		getline(arquivoStopWords,linha); 
+        linha = paraMaiusculoStringComRetorno(linha);
+
+        listaStopWords.push_back(linha);
+		
+	}
+	arquivoStopWords.close();
+
+    for (int i = 0; i < listaStopWords.size(); i++) {
+        cout << listaStopWords[i] << ", ";
+    }
+
+    
+
+
+    ofstream arquivoTextoSemStopWords;
+    ifstream arquivoTextoOriginal;
+
+
+
+    return 1;
+}
