@@ -1,0 +1,47 @@
+#include <iostream>
+
+using namespace std;
+
+bool estaOrdenado(const int vetor[], int tamanho)
+{
+    for (int i = 0; i < tamanho - 1; i++)
+    {
+        if (vetor[i] > vetor[i + 1])
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+int main()
+{
+    int tamanho;
+
+    cout << "Digite o tamanho do vetor: ";
+    cin >> tamanho;
+
+    if (tamanho <= 0)
+    {
+        cout << "Tamanho inválido." << endl;
+        return 1;
+    }
+
+    int* vetor = new int[tamanho];
+
+    for (int i = 0; i < tamanho; i++)
+    {
+        cout << "Digite o elemento " << i + 1 << ": ";
+        cin >> vetor[i];
+    }
+
+    if (estaOrdenado(vetor, tamanho))
+        cout << "true (o vetor está ordenado)" << endl;
+    else
+        cout << "false (o vetor está desordenado)" << endl;
+
+    delete[] vetor;
+
+    return 0;
+}
