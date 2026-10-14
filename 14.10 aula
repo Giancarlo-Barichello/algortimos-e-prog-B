@@ -1,0 +1,65 @@
+#include <cstdlib>
+#include <ctime>
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+void exibirVetor(vector<int> v) {
+    for (int i = 0; i < v.size(); i++) {
+        cout << v[i] << "\t";
+    }
+    cout << endl;
+}
+
+void popularVetor(vector<int> &v, int qtd, int inicio, int fim) {
+    for (int i = 0; i < qtd; i++) {
+        v.push_back(rand() % (fim - inicio + 1) + inicio);
+    }
+}
+
+void exercicio1(vector<int> vetorA, vector<int> vetorB) {
+    for (int i = 0; i < vetorA.size(); i++) {
+        for (int j = 0; j < vetorB.size(); j++) {
+            if (vetorA[i] == vetorB[j]) {
+                cout << vetorA[i] << "\t";
+                break;
+            }
+        }
+    }
+    cout << endl;
+}
+
+void exercicio2(vector<int> vetorA, vector<int> vetorB, vector<int> &vetorResultado) {
+    for (int i = 0; i < vetorA.size(); i++) {
+        for (int j = 0; j < vetorB.size(); j++) {
+            if (vetorA[i] == vetorB[j]) {
+                vetorResultado.push_back(vetorA[i]);
+                break;
+            }
+        }
+    }
+}
+
+int main() {
+    srand(time(NULL));
+
+    vector<int> vetorA, vetorB, vetorResultado;
+
+    popularVetor(vetorA, 10, 1, 20);
+    popularVetor(vetorB, 10, 1, 20);
+
+    cout << "Vetor A: ";
+    exibirVetor(vetorA);
+    cout << "Vetor B: ";
+    exibirVetor(vetorB);
+
+    cout << "Exercicio 1: ";
+    exercicio1(vetorA, vetorB);
+
+    exercicio2(vetorA, vetorB, vetorResultado);
+    cout << "Exercicio 2: ";
+    exibirVetor(vetorResultado);
+
+    return 0;
+}
